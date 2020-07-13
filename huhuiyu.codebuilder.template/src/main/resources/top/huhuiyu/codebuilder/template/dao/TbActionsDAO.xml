@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huhuiyu.codebuilder.template.dao.TbActionsDAO">
+    
+  <select id="queryAll" resultType="TbActions">
+    select aid,url,info,role from tb_actions
+  </select>
+
+  <!--
+  <select id="queryAll_COUNT" resultType="int">
+    select count(*) from tb_actions
+  </select>
+  -->
+
+  <select id="queryByKey" parameterType="TbActions" resultType="TbActions">
+    select aid,url,info,role from tb_actions 
+    where aid=#{aid}
+  </select>
+  
+  <insert id="add" parameterType="TbActions">
+    insert into tb_actions(url,info,role)
+    values(#{url},#{info},#{role})
+  </insert>
+  
+  <update id="update" parameterType="TbActions">
+    update tb_actions set url=#{url},info=#{info},role=#{role}
+    where aid=#{aid}
+  </update>
+  
+  <delete id="delete" parameterType="TbActions" >
+    delete from tb_actions
+    where aid=#{aid}
+  </delete>
+  
+</mapper>

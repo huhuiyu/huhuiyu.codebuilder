@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huhuiyu.codebuilder.template.dao.TbAdminDAO">
+    
+  <select id="queryAll" resultType="TbAdmin">
+    select aid,username,password,salt,nickname,role,enable,lastupdate from tb_admin
+  </select>
+
+  <!--
+  <select id="queryAll_COUNT" resultType="int">
+    select count(*) from tb_admin
+  </select>
+  -->
+
+  <select id="queryByKey" parameterType="TbAdmin" resultType="TbAdmin">
+    select aid,username,password,salt,nickname,role,enable,lastupdate from tb_admin 
+    where aid=#{aid}
+  </select>
+  
+  <insert id="add" parameterType="TbAdmin">
+    insert into tb_admin(username,password,salt,nickname,role,enable,lastupdate)
+    values(#{username},#{password},#{salt},#{nickname},#{role},#{enable},#{lastupdate})
+  </insert>
+  
+  <update id="update" parameterType="TbAdmin">
+    update tb_admin set username=#{username},password=#{password},salt=#{salt},nickname=#{nickname},role=#{role},enable=#{enable},lastupdate=#{lastupdate}
+    where aid=#{aid}
+  </update>
+  
+  <delete id="delete" parameterType="TbAdmin" >
+    delete from tb_admin
+    where aid=#{aid}
+  </delete>
+  
+</mapper>

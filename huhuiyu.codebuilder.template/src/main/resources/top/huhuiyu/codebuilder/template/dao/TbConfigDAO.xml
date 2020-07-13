@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huhuiyu.codebuilder.template.dao.TbConfigDAO">
+    
+  <select id="queryAll" resultType="TbConfig">
+    select cid,config_key,config_value,lastupdate from tb_config
+  </select>
+
+  <!--
+  <select id="queryAll_COUNT" resultType="int">
+    select count(*) from tb_config
+  </select>
+  -->
+
+  <select id="queryByKey" parameterType="TbConfig" resultType="TbConfig">
+    select cid,config_key,config_value,lastupdate from tb_config 
+    where cid=#{cid}
+  </select>
+  
+  <insert id="add" parameterType="TbConfig">
+    insert into tb_config(config_key,config_value,lastupdate)
+    values(#{configKey},#{configValue},#{lastupdate})
+  </insert>
+  
+  <update id="update" parameterType="TbConfig">
+    update tb_config set config_key=#{configKey},config_value=#{configValue},lastupdate=#{lastupdate}
+    where cid=#{cid}
+  </update>
+  
+  <delete id="delete" parameterType="TbConfig" >
+    delete from tb_config
+    where cid=#{cid}
+  </delete>
+  
+</mapper>

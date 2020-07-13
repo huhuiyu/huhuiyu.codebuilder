@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huhuiyu.codebuilder.template.dao.TbTokenInfoDAO">
+    
+  <select id="queryAll" resultType="TbTokenInfo">
+    select tiid,token,info_key,info,lastupdate from tb_token_info
+  </select>
+
+  <!--
+  <select id="queryAll_COUNT" resultType="int">
+    select count(*) from tb_token_info
+  </select>
+  -->
+
+  <select id="queryByKey" parameterType="TbTokenInfo" resultType="TbTokenInfo">
+    select tiid,token,info_key,info,lastupdate from tb_token_info 
+    where tiid=#{tiid}
+  </select>
+  
+  <insert id="add" parameterType="TbTokenInfo">
+    insert into tb_token_info(token,info_key,info,lastupdate)
+    values(#{token},#{infoKey},#{info},#{lastupdate})
+  </insert>
+  
+  <update id="update" parameterType="TbTokenInfo">
+    update tb_token_info set token=#{token},info_key=#{infoKey},info=#{info},lastupdate=#{lastupdate}
+    where tiid=#{tiid}
+  </update>
+  
+  <delete id="delete" parameterType="TbTokenInfo" >
+    delete from tb_token_info
+    where tiid=#{tiid}
+  </delete>
+  
+</mapper>

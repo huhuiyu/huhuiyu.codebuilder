@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huhuiyu.codebuilder.template.dao.TbRoleDAO">
+    
+  <select id="queryAll" resultType="TbRole">
+    select role_name,role_group,role_info,enable from tb_role
+  </select>
+
+  <!--
+  <select id="queryAll_COUNT" resultType="int">
+    select count(*) from tb_role
+  </select>
+  -->
+
+  <select id="queryByKey" parameterType="TbRole" resultType="TbRole">
+    select role_name,role_group,role_info,enable from tb_role 
+    where role_name=#{roleName}
+  </select>
+  
+  <insert id="add" parameterType="TbRole">
+    insert into tb_role(role_group,role_info,enable)
+    values(#{roleGroup},#{roleInfo},#{enable})
+  </insert>
+  
+  <update id="update" parameterType="TbRole">
+    update tb_role set role_group=#{roleGroup},role_info=#{roleInfo},enable=#{enable}
+    where role_name=#{roleName}
+  </update>
+  
+  <delete id="delete" parameterType="TbRole" >
+    delete from tb_role
+    where role_name=#{roleName}
+  </delete>
+  
+</mapper>
