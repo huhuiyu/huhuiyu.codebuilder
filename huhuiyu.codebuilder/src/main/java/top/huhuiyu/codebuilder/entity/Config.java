@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 应用配置文件
- * 
+ *
  * @author 胡辉煜
  */
 public class Config implements Serializable {

@@ -1,14 +1,7 @@
 package top.huhuiyu.codebuilder.utils;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import top.huhuiyu.api.dbutils.datasource.DataSourceInfo;
 import top.huhuiyu.api.dbutils.meta.MetaUtilsBean;
 import top.huhuiyu.api.dbutils.meta.TableInfo;
@@ -16,9 +9,15 @@ import top.huhuiyu.api.fileutil.FileUtil;
 import top.huhuiyu.api.freemarker.FreemarkerUtilBean;
 import top.huhuiyu.api.utils.JsonUtils;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 代码生成工具
- * 
+ *
  * @author 胡辉煜
  */
 public class CodeBuilder {
@@ -51,8 +50,7 @@ public class CodeBuilder {
       // 初始化模板工具
       freemarkerUtilBean = new FreemarkerUtilBean();
       freemarkerUtilBean.setDirectoryForTemplateLoading(templateRootDir);
-    }
-    catch (Exception ex) {
+    } catch (Exception ex) {
       throw new RuntimeException(ex);
     }
   }
@@ -64,21 +62,19 @@ public class CodeBuilder {
         FileUtil.deleteDirNoError(new File(outputDir));
       }
       // 输出模板
-      List<File>                files   = new ArrayList<>();
+      List<File> files = new ArrayList<>();
       Map<String, TemplateInfo> infoMap = builderConfigInfo.getInfoMap();
       for (String name : ftlMap.keySet()) {
         TemplatePathInfo templatePathInfo = ftlMap.get(name);
-        TemplateInfo     templateInfo     = infoMap.get(templatePathInfo.getPath());
+        TemplateInfo templateInfo = infoMap.get(templatePathInfo.getPath());
         if (templateInfo.isTablesMode()) {
           buildTable(templateInfo, templatePathInfo, files, name);
-        }
-        else {
+        } else {
           buildFile(templateInfo, templatePathInfo, files, name);
         }
       }
       return files;
-    }
-    catch (Exception ex) {
+    } catch (Exception ex) {
       throw new RuntimeException(ex);
     }
   }
@@ -89,8 +85,7 @@ public class CodeBuilder {
     if (templateInfo.getSubpackage() == null) {
       // 不用输出包的情况
       outfile = new File(CodeBuilderUtil.joinFilePath(outputDir, builderConfigInfo.getProjectName(), templateInfo.getOutpath(), name));
-    }
-    else {
+    } else {
       outfile = new File(CodeBuilderUtil.joinFilePath(outputDir, builderConfigInfo.getProjectName(), templateInfo.getOutpath(), FileUtil.parsePackage(builderUtil.getSubPackage(templateInfo.getSubpackage())), name));
     }
     log.debug(String.format("模板信息：%n%s%n%s%n%s", templatePathInfo, templateInfo, outfile));
@@ -103,13 +98,12 @@ public class CodeBuilder {
     initTables();
     for (TableInfo tableInfo : tables) {
       // 输出位置
-      File   outfile;
+      File outfile;
       String filename = builderUtil.getTableTemplateName(name, tableInfo, templateInfo.isNotClass(), templateInfo.getNamePostfix());
       if (templateInfo.getSubpackage() == null) {
         // 不用输出包的情况
         outfile = new File(CodeBuilderUtil.joinFilePath(outputDir, builderConfigInfo.getProjectName(), templateInfo.getOutpath(), filename));
-      }
-      else {
+      } else {
         outfile = new File(CodeBuilderUtil.joinFilePath(outputDir, builderConfigInfo.getProjectName(), templateInfo.getOutpath(), FileUtil.parsePackage(builderUtil.getSubPackage(templateInfo.getSubpackage())), filename));
       }
       log.debug(String.format("buildTable信息：%s:%s", name, builderUtil.getTableTemplateName(name, tableInfo, templateInfo.isNotClass(), templateInfo.getNamePostfix())));
@@ -129,19 +123,19 @@ public class CodeBuilder {
 
   private static final Logger log = LoggerFactory.getLogger(CodeBuilder.class);
 
-  private CodeBuilderUtil               builderUtil;
-  private FreemarkerUtilBean            freemarkerUtilBean;
-  private Map<String, Object>           dataMap;
-  private File                          templateRootDir;
-  private BuilderConfigInfo             builderConfigInfo;
-  private BuilderConfigInfo             baseConfigInfo;
-  private String                        outputDir;
+  private CodeBuilderUtil builderUtil;
+  private FreemarkerUtilBean freemarkerUtilBean;
+  private Map<String, Object> dataMap;
+  private File templateRootDir;
+  private BuilderConfigInfo builderConfigInfo;
+  private BuilderConfigInfo baseConfigInfo;
+  private String outputDir;
   private Map<String, TemplatePathInfo> ftlMap;
-  private List<TableInfo>               tables;
-  private String                        schema;
+  private List<TableInfo> tables;
+  private String schema;
 
   private DataSourceInfo dataSourceInfo;
-  private String         configFile;
+  private String configFile;
 
   public CodeBuilder(DataSourceInfo dataSourceInfo, String configFile, String schema, BuilderConfigInfo baseConfigInfo) {
     this.dataSourceInfo = dataSourceInfo;

@@ -1,3 +1,5 @@
+use code_build_demo;
+
 /* 框架必要的基础功能表 */
 create table tb_config
 (

@@ -4,13 +4,13 @@ import top.huhuiyu.api.beanutil.BaseInfoBean;
 
 /**
  * 模板路径信息
- * 
+ *
  * @author 胡辉煜
  */
 public class TemplatePathInfo extends BaseInfoBean {
   private static final long serialVersionUID = 7345245918544334068L;
-  private String            path;
-  private String            name;
+  private String path;
+  private String name;
 
   public TemplatePathInfo() {
   }

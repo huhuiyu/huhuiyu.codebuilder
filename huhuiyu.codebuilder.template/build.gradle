@@ -21,6 +21,8 @@ buildscript {
 apply plugin: 'java'
 //eclipse开发插件（会自动配置eclipse）
 apply plugin: 'eclipse'
+//idea开发插件（会自动配置idea）
+apply plugin: 'idea'
 //springboot插件
 apply plugin: 'org.springframework.boot'
 //springboot依赖管理插件
@@ -71,9 +73,9 @@ dependencies {
   // websocket
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '2.2.6.RELEASE'
   // huhuiyu.api
-  compile group: 'top.huhuiyu.api', name: 'huhuiyu-fileutils', version: '1.1.0'
-  compile group: 'top.huhuiyu.api', name: 'huhuiyu-utils', version: '1.1.2'
-  compile group: 'top.huhuiyu.api', name: 'huhuiyu-spring', version: '1.0.4'
+  compile group: 'top.huhuiyu.api', name: 'huhuiyu-fileutils', version: '2.0.0'
+  compile group: 'top.huhuiyu.api', name: 'huhuiyu-utils', version: '2.0.0'
+  compile group: 'top.huhuiyu.api', name: 'huhuiyu-spring', version: '2.0.0'
   
   //springboot测试依赖
   testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.6.RELEASE'

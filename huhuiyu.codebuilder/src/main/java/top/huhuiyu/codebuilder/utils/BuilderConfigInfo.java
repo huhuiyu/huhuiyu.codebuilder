@@ -1,37 +1,38 @@
 package top.huhuiyu.codebuilder.utils;
 
+import top.huhuiyu.api.beanutil.BaseInfoBean;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import top.huhuiyu.api.beanutil.BaseInfoBean;
 
 /**
  * 代码生成工具配置信息类
- * 
+ *
  * @author 胡辉煜
  */
 public class BuilderConfigInfo extends BaseInfoBean {
-  private static final long  serialVersionUID = 2089466832780219001L;
+  private static final long serialVersionUID = 2089466832780219001L;
   /**
    * 项目名称
    */
-  private String             projectName;
+  private String projectName;
   /**
    * 作者名称
    */
-  private String             author;
+  private String author;
   /**
    * 基础包名称
    */
-  private String             packageName;
+  private String packageName;
   /**
    * 输出路径
    */
-  private String             outputDir;
+  private String outputDir;
   /**
    * 是否清除输出目录
    */
-  private boolean            clearDir         = false;
+  private boolean clearDir = false;
   private List<TemplateInfo> templateInfos;
 
   public BuilderConfigInfo() {
@@ -39,7 +40,7 @@ public class BuilderConfigInfo extends BaseInfoBean {
 
   /**
    * 获取模板信息map映射，key为templatePath
-   * 
+   *
    * @return 模板信息map
    */
   public Map<String, TemplateInfo> getInfoMap() {

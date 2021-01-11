@@ -1,25 +1,5 @@
 package top.huhuiyu.codebuilder.ui;
 
-import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Font;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.huhuiyu.api.dbutils.datasource.DataSourceBuilder;
@@ -30,9 +10,19 @@ import top.huhuiyu.api.frame.panel.GridBagPanel;
 import top.huhuiyu.codebuilder.utils.BuilderConfigInfo;
 import top.huhuiyu.codebuilder.utils.CodeBuilder;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * SpringBoot项目基础类
- * 
+ *
  * @author 胡辉煜
  */
 public abstract class BaseSpringBootProjectFrame extends JFrame implements ActionListener {

@@ -1,30 +1,19 @@
 package top.huhuiyu.codebuilder.util.test;
 
-import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import top.huhuiyu.api.dbutils.datasource.DataSourceBuilder;
 import top.huhuiyu.api.dbutils.datasource.DataSourceInfo;
 import top.huhuiyu.api.fileutil.FileUtil;
 import top.huhuiyu.api.utils.JsonUtils;
-import top.huhuiyu.codebuilder.utils.BuilderConfigInfo;
-import top.huhuiyu.codebuilder.utils.CodeBuilder;
-import top.huhuiyu.codebuilder.utils.CodeBuilderUtil;
-import top.huhuiyu.codebuilder.utils.TemplatePathInfo;
-import top.huhuiyu.codebuilder.utils.TypeInfo;
+import top.huhuiyu.codebuilder.utils.*;
+
+import java.io.File;
+import java.sql.*;
+import java.util.Date;
+import java.util.*;
 
 /**
  * CodeBuilder测试
- * 
+ *
  * @author 胡辉煜
  */
 public class CodeBuilderTest {

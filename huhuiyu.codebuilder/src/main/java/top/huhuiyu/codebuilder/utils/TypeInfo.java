@@ -4,7 +4,7 @@ import top.huhuiyu.api.beanutil.BaseInfoBean;
 
 /**
  * 类型映射信息
- * 
+ *
  * @author 胡辉煜
  */
 public class TypeInfo extends BaseInfoBean {

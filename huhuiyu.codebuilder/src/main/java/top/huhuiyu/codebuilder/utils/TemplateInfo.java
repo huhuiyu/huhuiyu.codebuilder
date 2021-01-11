@@ -5,7 +5,7 @@ import top.huhuiyu.api.utils.StringUtils;
 
 /**
  * 模板信息
- * 
+ *
  * @author 胡辉煜
  */
 public class TemplateInfo extends BaseInfoBean {
@@ -20,23 +20,23 @@ public class TemplateInfo extends BaseInfoBean {
   /**
    * 输出路径，可以省略，默认在输出项目根目录
    */
-  private String  outpath;
+  private String outpath;
   /**
    * 如果不是输出到package中的文件可以省略,输出到项目基本包需要给""
    */
-  private String  subpackage;
+  private String subpackage;
   /**
    * 是否是通过表格输出模板信息
    */
-  private boolean tablesMode  = false;
+  private boolean tablesMode = false;
   /**
    * 名称是否不需要使用class模式
    */
-  private boolean notClass    = false;
+  private boolean notClass = false;
   /**
    * 名称后缀（tablesMode才需要）
    */
-  private String  namePostfix = "";
+  private String namePostfix = "";
 
   public TemplateInfo() {
   }

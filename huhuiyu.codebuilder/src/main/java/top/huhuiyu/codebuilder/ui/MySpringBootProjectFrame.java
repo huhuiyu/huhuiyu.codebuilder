@@ -1,16 +1,16 @@
 package top.huhuiyu.codebuilder.ui;
 
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.Scanner;
-
 import top.huhuiyu.api.frame.FrameUtil;
 import top.huhuiyu.api.utils.JsonUtils;
 import top.huhuiyu.codebuilder.entity.Config;
 
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Scanner;
+
 /**
  * MySpringBoot项目生成工具
- * 
+ *
  * @author 胡辉煜
  */
 public class MySpringBootProjectFrame extends BaseSpringBootProjectFrame implements ActionListener {

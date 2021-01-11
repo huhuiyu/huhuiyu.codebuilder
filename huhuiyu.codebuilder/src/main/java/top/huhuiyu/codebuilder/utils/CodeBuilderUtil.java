@@ -1,13 +1,5 @@
 package top.huhuiyu.codebuilder.utils;
 
-import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import top.huhuiyu.api.dbutils.DbUtils;
 import top.huhuiyu.api.dbutils.meta.TableColumnInfo;
 import top.huhuiyu.api.dbutils.meta.TableInfo;
@@ -15,9 +7,13 @@ import top.huhuiyu.api.fileutil.FileUtil;
 import top.huhuiyu.api.utils.JsonUtils;
 import top.huhuiyu.api.utils.StringUtils;
 
+import java.io.File;
+import java.io.InputStream;
+import java.util.*;
+
 /**
  * 代码生成工具辅助类
- * 
+ *
  * @author 胡辉煜
  */
 public class CodeBuilderUtil {
@@ -50,12 +46,11 @@ public class CodeBuilderUtil {
 
   /**
    * 获取模板名称对应表模式的输出文件名称
-   * 
+   *
    * @param name        模板名称
    * @param tableInfo   表信息
    * @param noClass     name不是class模板
    * @param namePostfix 文件名后置补充
-   * 
    * @return 模板名称对应表模式的输出文件名称
    */
   public String getTableTemplateName(String name, TableInfo tableInfo, boolean noClass, String namePostfix) {
@@ -74,11 +69,10 @@ public class CodeBuilderUtil {
 
   /**
    * 获取模板名称对应表模式的输出类文件名称
-   * 
+   *
    * @param name        模板名称
    * @param tableInfo   表信息
    * @param namePostfix 文件名后置补充
-   * 
    * @return 模板名称对应表模式的输出文件名称
    */
   public String getTableTemplateName(String name, TableInfo tableInfo, String namePostfix) {
@@ -87,9 +81,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取表对应的类名称
-   * 
+   *
    * @param tableInfo 表信息
-   * 
    * @return 表对应的类名称
    */
   public String getClassName(TableInfo tableInfo) {
@@ -98,9 +91,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取列名对应的字段名称
-   * 
+   *
    * @param columnInfo 列信息
-   * 
    * @return 列名对应的字段名称
    */
   public String getColFieldName(TableColumnInfo columnInfo) {
@@ -109,9 +101,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取表名对应的字段名称
-   * 
+   *
    * @param tableInfo 表信息
-   * 
    * @return 表名对应的字段名称
    */
   public String getTableFieldName(TableInfo tableInfo) {
@@ -120,9 +111,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取列名对应的getter名称
-   * 
+   *
    * @param columnInfo 列信息
-   * 
    * @return 列名对应的getter名称
    */
   public String getColGetter(TableColumnInfo columnInfo) {
@@ -131,9 +121,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取列名对应的setter名称
-   * 
+   *
    * @param columnInfo 列信息
-   * 
    * @return 列名对应的setter名称
    */
   public String getColSetter(TableColumnInfo columnInfo) {
@@ -142,9 +131,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取列的java类型信息
-   * 
+   *
    * @param columnInfo 列信息
-   * 
    * @return 列的java类型信息
    */
   public String getColType(TableColumnInfo columnInfo) {
@@ -157,9 +145,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取表名对应的getter名称
-   * 
+   *
    * @param tableInfo 表信息
-   * 
    * @return 列名对应的getter名称
    */
   public String getTableGetter(TableInfo tableInfo) {
@@ -168,9 +155,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取表名对应的setter名称
-   * 
+   *
    * @param tableInfo 表信息
-   * 
    * @return 表名对应的setter名称
    */
   public String getTableSetter(TableInfo tableInfo) {
@@ -179,7 +165,7 @@ public class CodeBuilderUtil {
 
   /**
    * 获取随机的序列化id
-   * 
+   *
    * @return 随机的序列化id
    */
   public String getSerialVersionUid() {
@@ -188,9 +174,8 @@ public class CodeBuilderUtil {
 
   /**
    * 获取子包的完整名称，添加packageName字段指定的基本包名称
-   * 
+   *
    * @param subpackage 子包名称
-   * 
    * @return 子包的完整名称
    */
   public String getSubPackage(String subpackage) {
@@ -203,9 +188,8 @@ public class CodeBuilderUtil {
 
   /**
    * 将多个文件路径信息拼接成完整路径信息
-   * 
+   *
    * @param filenames 文件路径信息
-   * 
    * @return 完整路径信息
    */
   public static String joinFilePath(String... filenames) {
@@ -228,9 +212,8 @@ public class CodeBuilderUtil {
 
   /**
    * 读取目录中的模板文件信息到集合中
-   * 
+   *
    * @param dir 模板文件目录
-   * 
    * @return 目录中的模板文件信息
    */
   public static Map<String, TemplatePathInfo> getTemplatePathInfo(String dir) {
