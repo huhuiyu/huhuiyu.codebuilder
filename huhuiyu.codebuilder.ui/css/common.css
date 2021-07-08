@@ -1,0 +1,9 @@
+body {
+  margin: 0px;
+}
+
+.main-title {
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>胡辉煜-huhuiyu.js测试</title>
+  <meta name="author" content="胡辉煜">
+  <meta name="keywords" content="胡辉煜">
+  <meta name="description" content="胡辉煜-程序猿学习">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <link rel="stylesheet" href="css/common.css">
+  <!-- 引入elementui样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-title">{{title}}</div>
+    <hr>
+    <!-- md5加密测试 -->
+    <div>
+      <el-form :inline="true">
+        <el-form-item>
+          <el-input v-model="md5info" placeholder="要转换md5的信息"></el-input>
+        </el-form-item>
+        <el-form-item>
+          加密结果：<span>{{md5result}}</span>
+        </el-form-item>
+      </el-form>
+    </div>
+    <hr>
+    <!-- ajax测试 -->
+    <div v-loading="ajax.loading">
+      <el-form :inline="true">
+        <el-form-item>
+          <el-input v-model="ajax.echo" placeholder="echo参数"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="sendAjax">发送</el-button>
+        </el-form-item>
+      </el-form>
+      <p>
+        请求结果：{{ajax.result}}
+      </p>
+    </div>
+  </div>
+
+  <!-- ajax相关第三方js -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/qs/6.10.1/qs.js"></script>
+  <!-- md5加密相关第三方js -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/spark-md5/3.0.0/spark-md5.js"></script>
+  <!-- vue第三方js -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  <!-- 引入elementui组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <!-- 自定义js -->
+  <script src="js/huhuiyu.js"></script>
+  <script src="js/test-huhuiyu.js"></script>
+</body>
+
+</html>
