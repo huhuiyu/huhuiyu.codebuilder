@@ -30,7 +30,10 @@ public class MyExceptionHandler {
     // 处理应用程序自定义异常
     if (ex instanceof AppException) {
       AppException appException = (AppException) ex;
-      return BaseResult.getFail(appException.getCode(), appException.getMessage());
+      BaseResult<Object> result = BaseResult.getFail(appException.getCode(), appException.getMessage());
+      result.setToken(appException.getToken());
+      log.debug("自定义异常token：{}", appException.getToken());
+      return result;
     }
     if (ex instanceof NoHandlerFoundException) {
       return BaseResult.getFail(404, "资源不存在");

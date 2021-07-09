@@ -57,14 +57,14 @@ public class WebSocketServiceImpl implements WebSocketService {
       publishes.put(channel, new HashSet<Session>());
     }
     publishes.get(channel).add(session);
-    log.debug("publishes:" + publishes.toString());
+    log.debug("publishes:{}", publishes.toString());
   }
 
   @Override
   public void publish(String channel, Object message) throws Exception {
     String json = JsonUtils.stringify(message);
     Set<Session> set = publishes.get(channel);
-    log.debug(String.format("set:%s", set));
+    log.debug("set:{}", set);
     if (set == null) {
       return;
     }

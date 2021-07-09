@@ -19,6 +19,8 @@ insert into tb_config(config_key,config_value) values('image_code_length',5);
 insert into tb_config(config_key,config_value) values('ip_max_new_token_count',10);
 /* ip超过token申请限制后停用时间（秒） */
 insert into tb_config(config_key,config_value) values('ip_ban_timeount',600);
+/* 发布到tomcat的上下文路径路径 */
+insert into tb_config(config_key,config_value) values('tomcat_context_path','/huhuiyu.codebuilder.template-1.0.0');
 
 select cid,config_key,config_value,lastupdate from tb_config;
 

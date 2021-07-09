@@ -21,28 +21,28 @@ public class ControllerLogger extends BaseControllerAop {
 
   private static final Logger log = LoggerFactory.getLogger(ControllerLogger.class);
 
-  @Before("controller()")
+    @Before("controller()")
   public void before(JoinPoint jp) {
-    log.debug(String.format("进入===>%s", jp.getSignature()));
+    log.debug("进入===>{}", jp.getSignature());
     Object[] args = jp.getArgs();
     if (args == null || args.length == 0) {
       log.debug("方法没有参数");
     } else {
       log.debug("参数列表：");
       for (Object arg : args) {
-        log.debug(arg + "");
+        log.debug("{}", arg);
       }
     }
   }
 
   @After("controller()")
   public void after(JoinPoint jp) {
-    log.debug(String.format("%s执行完毕", jp.getSignature()));
+    log.debug("{}执行完毕", jp.getSignature());
   }
 
   @AfterReturning(pointcut = "controller()", returning = "result")
   public void returning(JoinPoint jp, Object result) {
-    log.debug(String.format("%s返回值：%s", jp.getSignature(), result));
+    log.debug("{}返回值：{}", jp.getSignature(), result);
   }
 
 }

@@ -32,7 +32,7 @@ public class WebSocket {
   @OnOpen
   public void onOpen(Session session) {
     webSocketService.addSession(session);
-    log.debug("onOpen：" + session.getId());
+    log.debug("onOpen：{}", session.getId());
   }
 
   /**
@@ -41,7 +41,7 @@ public class WebSocket {
   @OnClose
   public void onClose(Session session) {
     webSocketService.removeSession(session);
-    log.debug("onClose" + session.getId());
+    log.debug("onClose：{}", session.getId());
   }
 
   /**
@@ -50,7 +50,7 @@ public class WebSocket {
   @OnMessage
   public void onMessage(String message, Session session) throws IOException {
     webSocketService.addSession(session);
-    log.debug("onMessage：" + message);
+    log.debug("onMessage：{}", message);
   }
 
   /**

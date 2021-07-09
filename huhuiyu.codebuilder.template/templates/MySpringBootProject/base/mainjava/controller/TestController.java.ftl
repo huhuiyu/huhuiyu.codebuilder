@@ -1,6 +1,7 @@
 package ${builderUtil.getSubPackage("controller")};
 
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 
@@ -16,7 +17,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import top.huhuiyu.api.spring.base.BaseResult;
+import top.huhuiyu.api.spring.exception.AppException;
 import top.huhuiyu.api.utils.ImageCode;
+import ${builderUtil.getSubPackage("aop")}.AnnoNoToken;
 import ${builderUtil.getSubPackage("base")}.MyBaseModel;
 import ${builderUtil.getSubPackage("entity")}.TbTokenInfo;
 import ${builderUtil.getSubPackage("message")}.UtilMessage;
@@ -71,5 +74,20 @@ public class TestController {
   @PostMapping("/converter")
   public BaseResult<Object> converter(TestModel model) throws Exception {
     return BaseResult.getSuccess(String.format("%s", model));
+  }
+
+  @AnnoNoToken
+  @ApiOperation(value = "token注解测试，本方法不需要token信息")
+  @PostMapping("/notoken")
+  public BaseResult<Object> notoken() throws Exception {
+    BaseResult<Object> result = BaseResult.getSuccess("本方法不需要token信息");
+    result.setResultData(new Date());
+    return result;
+  }
+
+  @ApiOperation(value = "自定义异常信息测试")
+  @PostMapping("/exception")
+  public BaseResult<Object> notoken(TestModel model) throws Exception {
+    throw AppException.getAppException("自定义异常", model.getToken());
   }
 }

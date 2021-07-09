@@ -27,7 +27,7 @@ import top.huhuiyu.codebuilder.template.aop.ControllerToken;
 @Configuration
 @EnableSwagger2
 @ComponentScan(basePackages = { "top.huhuiyu.codebuilder.template" })
-@ConditionalOnProperty(value = { "swagger-enable" }, havingValue = "true")
+@ConditionalOnProperty(value = { "spring.web.resources.add-mappings" }, havingValue = "true")
 public class SwaggerConfig {
 
   @Bean

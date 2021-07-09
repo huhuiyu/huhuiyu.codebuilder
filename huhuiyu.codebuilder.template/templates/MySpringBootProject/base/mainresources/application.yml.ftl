@@ -1,18 +1,27 @@
 server:
   port: 20000
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
 spring:
+  jmx:
+    default-domain: ${baseInfo.projectName}
+  web: 
+    resources:
+      add-mappings: true
+  mvc:
+    throw-exception-if-no-handler-found: true
   jackson:
     default-property-inclusion: non-null
     serialization:
       write-dates-as-timestamps: true
   servlet:
     multipart:
+      enabled: true
+      file-size-threshold: 50MB
       max-file-size: 10MB
       max-request-size: 10MB
-  http:
-    encoding:
-      force: true
-      charset: UTF-8
   datasource:
     driver-class-name: ${dataSourceInfo.driver}
     url: ${dataSourceInfo.url}
@@ -25,4 +34,3 @@ mybatis:
   config-location: classpath:mybatis-config.xml
 pagehelper:
   reasonable: true
-swagger-enable: true

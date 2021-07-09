@@ -27,7 +27,7 @@ import ${builderUtil.getSubPackage("aop")}.ControllerToken;
 @Configuration
 @EnableSwagger2
 @ComponentScan(basePackages = { "${builderUtil.getSubPackage("")}" })
-@ConditionalOnProperty(value = { "swagger-enable" }, havingValue = "true")
+@ConditionalOnProperty(value = { "spring.web.resources.add-mappings" }, havingValue = "true")
 public class SwaggerConfig {
 
   @Bean

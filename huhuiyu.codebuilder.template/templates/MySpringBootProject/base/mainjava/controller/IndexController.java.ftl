@@ -30,4 +30,10 @@ public class IndexController {
   public BaseResult<IndexMessage> index(IndexModel model) throws Exception {
     return indexService.index(model);
   }
+
+  @ApiOperation(value = "WebSocket说明", notes = "本接口为WebSocket说明，不要调用<br/>" + "服务器基本地址和接口地址一致，例如wss://huhuiyu.top/teach-demo-service或者ws://127.0.0.1:20000")
+  @PostMapping("/websocket")
+  public BaseResult<IndexMessage> info(IndexModel model) throws Exception {
+    return indexService.index(model);
+  }
 }

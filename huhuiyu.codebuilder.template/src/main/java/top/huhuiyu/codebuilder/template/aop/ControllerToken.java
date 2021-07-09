@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import top.huhuiyu.codebuilder.template.base.MyBaseModel;
 import top.huhuiyu.codebuilder.template.dao.UtilsDAO;
 import top.huhuiyu.codebuilder.template.entity.TbActions;
 import top.huhuiyu.codebuilder.template.entity.TbAdmin;
+import top.huhuiyu.codebuilder.template.entity.TbConfig;
 import top.huhuiyu.codebuilder.template.entity.TbTokenInfo;
 import top.huhuiyu.codebuilder.template.service.UtilService;
 
@@ -34,6 +36,10 @@ import top.huhuiyu.codebuilder.template.service.UtilService;
 @Aspect
 @Component
 public class ControllerToken extends BaseControllerAop {
+  /**
+   * token表单请求参数名称
+   */
+  public static final String REQUEST_TOKEN_KEY = "request_token_info";
   /**
    * 需要登陆的错误提示信息
    */
@@ -54,6 +60,10 @@ public class ControllerToken extends BaseControllerAop {
    * 封ip错误提示
    */
   public static final String IP_BAN_ERROR = "需要正确的token信息！";
+  /**
+   * tomcat发布路径配置
+   */
+  public static final String TOMCAT_CONTEXT_PATH_KEY = "tomcat_context_path";
 
   private static final Logger log = LoggerFactory.getLogger(ControllerToken.class);
 
@@ -79,7 +89,7 @@ public class ControllerToken extends BaseControllerAop {
     // 管理员登陆信息
     tbTokenInfo.setInfoKey(UtilService.LOGIN_ADMIN);
     TbAdmin admin = utilsDAO.queryAdminByToken(tbTokenInfo);
-    ControllerToken.log.debug(String.format("admin=====>", admin));
+    log.debug("admin=====>{}", admin);
     model.setLoginAdmin(admin);
   }
 
@@ -89,7 +99,13 @@ public class ControllerToken extends BaseControllerAop {
     ServletRequestAttributes sra = (ServletRequestAttributes) ra;
     HttpServletRequest request = sra.getRequest();
     TbActions actions = new TbActions();
-    actions.setUrl(request.getRequestURI());
+    // 获取tomcat路径配置信息
+    TbConfig config = new TbConfig();
+    config.setConfigKey(TOMCAT_CONTEXT_PATH_KEY);
+    config = utilsDAO.queryConfig(config);
+    log.debug("tomcat上下文信息{}", config);
+    // 移除tomcat路径信息
+    actions.setUrl(request.getRequestURI().replaceFirst(config.getConfigValue(), ""));
     actions = utilsDAO.queryByUrl(actions);
     // 查询不到的url不受管制
     if (actions == null) {
@@ -151,12 +167,31 @@ public class ControllerToken extends BaseControllerAop {
    * @throws Exception 处理发生错误
    */
   private TbTokenInfo processToken(ProceedingJoinPoint pjp) throws Exception {
+    // 通过注解获取是否需要token信息
+    AnnoNoToken annoNoToken = pjp.getTarget().getClass().getAnnotation(AnnoNoToken.class);
+    if (annoNoToken != null) {
+      log.debug("获取到AnnoNoToken信息的对象:{}", pjp.getTarget().getClass().getName());
+      return null;
+    }
+    MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+    annoNoToken = methodSignature.getMethod().getAnnotation(AnnoNoToken.class);
+    if (annoNoToken != null) {
+      log.debug("获取到AnnoNoToken信息的方法:{}", methodSignature.getMethod().getName());
+      return null;
+    }
+    // model信息处理
     MyBaseModel model = getMyBaseModel(pjp);
     if (model != null) {
       RequestAttributes ra = RequestContextHolder.getRequestAttributes();
       ServletRequestAttributes sra = (ServletRequestAttributes) ra;
       HttpServletRequest request = sra.getRequest();
+      // 头信息中的token
       model.setToken(request.getHeader(TOKEN_KEY));
+      // 请求参数中的token
+      String requestToken = request.getParameter(REQUEST_TOKEN_KEY);
+      if (!StringUtils.isEmpty(requestToken)) {
+        model.setToken(requestToken);
+      }
       TbTokenInfo token = model.makeTbTokenInfo();
       // 校验并更新token信息
       token = utilService.checkToken(token);
@@ -170,7 +205,7 @@ public class ControllerToken extends BaseControllerAop {
   public Object around(ProceedingJoinPoint pjp) throws Throwable {
     log.debug("控制器切面token处理");
     TbTokenInfo token = processToken(pjp);
-    log.debug(String.format("token信息：%s", token));
+    log.debug("token信息：{}", token);
     // 登陆信息处理
     processAuthInfo(pjp);
     // 权限拦截
@@ -179,7 +214,7 @@ public class ControllerToken extends BaseControllerAop {
       return check;
     }
     Object result = pjp.proceed();
-    // 如果应答为JsonMessage且token存在就应答回去
+    // 如果应答为BaseResult且token存在就应答回去
     if ((token != null) && (result instanceof BaseResult)) {
       BaseResult<?> message = (BaseResult<?>) result;
       message.setToken(token.getToken());

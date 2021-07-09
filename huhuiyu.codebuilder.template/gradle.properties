@@ -1,0 +1,13 @@
+beanutils_version=1.0.0
+dbutils_version=1.0.0
+fileutils_version=1.0.0
+frame_version=1.0.0
+freemarker_version=1.0.0
+spring_version=1.0.0
+utils_version=1.0.0
+xml_version=1.0.0
+java_compatibility=1.8
+java_encoding=UTF-8
+maveninfo_url=https://maven.huhuiyu.top/repository/huhuiyu/
+maveninfo_aliyun_url=https://maven.aliyun.com/nexus/content/groups/public/
+project_version=1.0.0
